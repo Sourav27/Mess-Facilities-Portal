@@ -13,7 +13,6 @@
         <li><strong>Name:</strong> <%= session[:username] %></li>
         <li><strong>uID:</strong> <%= session[:user_id] %></li>
         <li><img src="<%= session[:user_imageurl] %>"></li>
-        <li><strong>URL:</strong> <%= session[:user_url] %></li>
       </ul>
     </div>
   </div>
