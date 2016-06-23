@@ -1,7 +1,3 @@
-<h1><%= @s %></h1>
-
-<%= @tokenURL %>
-<%= link_to "sign in",  @auth_url %>
 <%if session[:username] %>
 
   <div class="page-header">
@@ -17,6 +13,6 @@
     </div>
   </div>
 
-
-
+<%else%>
+<%= link_to "sign in",  @auth_url %>
 <%end%>
