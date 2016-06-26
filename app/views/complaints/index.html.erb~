@@ -12,3 +12,5 @@
 
 
 <% end %>
+
+<%= link_to "New Complaint", new_complaint_path , class: "btn btn-primary" %>
