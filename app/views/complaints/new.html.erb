@@ -1,0 +1,11 @@
+<h1>Register a new complaint</h1>
+<% if logged_in? %>
+	<% @categories = ["Mess", "Facilities"] %>
+	<%= form_for(:complaint, url: complaints_path, method: :post) do |f| %>
+		<%= f.text_field :title, placeholder: "Title" %><br>
+		<%= f.select :category, options_for_select(["Mess", "Facilities"]), :prompt => "Select a catrgory" %><br>
+		<%= f.hidden_field :mess, :value => "null" %> <br>
+		<%= f.text_area :content, placeholder: "Content" %><br>
+		<%= f.submit class: "btn btn-primary"%>
+	<% end %>
+<% end %>
