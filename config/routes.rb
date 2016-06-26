@@ -1,9 +1,13 @@
 Rails.application.routes.draw do
+  resources :complaints
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
- root 'oauth#index'
+ root 'complaints#index'
+
+ get 'login'=> 'oauth#index'
+ delete 'logout'=>'oauth#signout'
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

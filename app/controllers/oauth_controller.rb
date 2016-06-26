@@ -23,9 +23,11 @@ helper_method :generate_auth_req
    
      		@username=@user['username'].upcase
      		
-	     		session[:username]=@username
-	     		session[:user_id]=@user['id']
-			session[:user_imageurl]="http://photos.iitm.ac.in/byroll.php?roll="+@username
+     		session[:username]=@username
+     		session[:user_id]=@user['id']
+			@student=User.find_by_username(@user['username'])
+     		# log_in @student
+			redirect_back_or root_path
 	     	
 	        end
 		elsif  @auth_code
@@ -89,7 +91,7 @@ def generate_auth_req
 		@file = JSON.parse open(@token_url).read
 		@access_token=@file['access_token']
    
-		end
+	end
 
   	def get_access_token 
     	@access_token = session[:access_token]
