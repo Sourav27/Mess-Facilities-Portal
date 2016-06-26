@@ -13,20 +13,19 @@
 
 ActiveRecord::Schema.define(version: 20160626112411) do
 
-  create_table "complaints", force: :cascade do |t|
-    t.integer  "user_id",    limit: 4,                     null: false
-    t.string   "title",      limit: 255,                   null: false
+  create_table "complaints", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
+    t.integer  "user_id",                                  null: false
+    t.string   "title",                                    null: false
     t.text     "content",    limit: 65535,                 null: false
-    t.string   "category",   limit: 255,                   null: false
-    t.string   "mess",       limit: 255,                   null: false
+    t.string   "category",                                 null: false
+    t.string   "mess",                                     null: false
     t.boolean  "solved",                   default: false, null: false
     t.datetime "created_at",                               null: false
     t.datetime "updated_at",                               null: false
+    t.index ["user_id"], name: "index_complaints_on_user_id", using: :btree
   end
 
-  add_index "complaints", ["user_id"], name: "index_complaints_on_user_id", using: :btree
-
-  create_table "users", force: :cascade do |t|
+  create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
