@@ -1,8 +1,8 @@
 <% @complaints.each do |complaint| %>
 <h3><%= complaint.title %></h3>
-<i><%= complaint.user.username %>  | <%= complaint.user.fullname.capitalize %> | <span class="glyphicon glyphicon-time"></span> <%= (complaint.created_at+330.minutes).strftime("%d-%m-%y   %l:%M %p") %></i>
+<i><%= complaint.user.username %>  | <%= complaint.user.fullname.titleize %> | <span class="glyphicon glyphicon-time"></span> <%= (complaint.created_at+330.minutes).strftime("%d-%m-%y   %l:%M %p") %></i>
 <br>
 <%= complaint.content %><br><br>
 <% end %>
 
-<%= link_to "New Complaint", new_complaint_path , class: "btn btn-primary" %>
+<%= link_to "New Complaint", new_complaint_path , class: "btn btn-primary" %> 

@@ -9,6 +9,10 @@ class ComplaintsController < ApplicationController
 		@complaint =  Complaint.new
 	end
 
+	def show
+		
+	end
+
 	def create
 		@complaint =  Complaint.new(complaint_params)
 		@complaint.user_id = current_user.id
