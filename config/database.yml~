@@ -17,10 +17,10 @@ production:
   <<: *default
   database: mess_facilities_production
   username: root
-  password: 222     
+  password: password      
 
 students_1617:
   <<: *default
   database: students_1617
   username: root
-  password: 222
+  password: password

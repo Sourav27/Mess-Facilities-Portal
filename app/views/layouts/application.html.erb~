@@ -19,7 +19,7 @@
 		<%= yield %>
 		</div>
 		<div class="col-lg-4">
-		<%= render 'complaints/new' %>
+		<%= render '' %>
 		</div>
 	    </div>
 </div>
