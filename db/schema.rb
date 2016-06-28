@@ -11,17 +11,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160626112411) do
+ActiveRecord::Schema.define(version: 20160628123838) do
+
+  create_table "categories", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
+    t.string  "name",      null: false
+    t.string  "type_name", null: false
+    t.integer "type_id",   null: false
+  end
 
   create_table "complaints", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
-    t.integer  "user_id",                                  null: false
-    t.string   "title",                                    null: false
-    t.text     "content",    limit: 65535,                 null: false
-    t.string   "category",                                 null: false
-    t.string   "mess",                                     null: false
-    t.boolean  "solved",                   default: false, null: false
-    t.datetime "created_at",                               null: false
-    t.datetime "updated_at",                               null: false
+    t.integer  "user_id",                                   null: false
+    t.string   "title",                                     null: false
+    t.text     "content",     limit: 65535,                 null: false
+    t.boolean  "solved",                    default: false, null: false
+    t.datetime "created_at",                                null: false
+    t.datetime "updated_at",                                null: false
+    t.string   "attachment"
+    t.integer  "category_id"
+    t.index ["category_id"], name: "index_complaints_on_category_id", using: :btree
     t.index ["user_id"], name: "index_complaints_on_user_id", using: :btree
   end
 

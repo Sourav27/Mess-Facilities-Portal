@@ -1,9 +1,9 @@
 class ComplaintsController < ApplicationController
-	before_action :set_complaint, only: [:show,:create,:destroy]
+	before_action :set_complaint, only: [:show,:destroy]
 	before_action :authenticate_user!
 
 	def index
-		@complaints = current_user.complaints.order('created_at').all
+		@complaints = current_user.complaints.order('created_at desc').all
 	end
 
 	def new
@@ -17,10 +17,16 @@ class ComplaintsController < ApplicationController
 	def create
 		@complaint =  Complaint.new(complaint_params)
 		@complaint.user_id = current_user.id
-		
+		if params[:complaint][:category]=='1'
+			@complaint.category_id = params[:complaint][:mess_id]
+		elsif params[:complaint][:category]=='2'
+			@complaint.category_id = params[:complaint][:facility_id]
+		end
+
+
 		respond_to do |format|
 			if @complaint.save
-				format.html { redirect_to @comlaint, notice: "Complaint registered successfully!" }
+				format.html { redirect_to @complaint, notice: "Complaint registered successfully!" }
 				format.json { render :show, status: :created, location: @complaint }
 			else
 				format.html { render :new }
@@ -53,6 +59,6 @@ class ComplaintsController < ApplicationController
 	end
 
 	def complaint_params
-	  params.require(:complaint).permit(:title, :content, :category, :mess)
+	  params.require(:complaint).permit(:title, :content, :category_id, :attachment)
 	end
 end
