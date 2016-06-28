@@ -1,8 +1,20 @@
 <% @complaints.each do |complaint| %>
-<h3><%= complaint.title %></h3>
-<i><%= complaint.user.username %>  | <%= complaint.user.fullname.titleize %> | <span class="glyphicon glyphicon-time"></span> <%= (complaint.created_at+330.minutes).strftime("%d-%m-%y   %l:%M %p") %></i>
-<br>
-<%= complaint.content %><br><br>
-<% end %>
 
-<%= link_to "New Complaint", new_complaint_path , class: "btn btn-primary" %> 
+		<div class="panel panel-default">
+            <div class="panel-heading">
+                <h3><%= complaint.title %><small class="pull-right"><%= complaint.mess+' '+complaint.category %></small></h3><h4> <small>by <%= complaint.user.fullname.titleize %>  | <%= complaint.user.username %> | <span class="glyphicon glyphicon-time"></span> <%= (complaint.created_at+330.minutes).strftime("%d-%m-%y   %l:%M %p") %> </small></h4>
+            </div>
+            <div class="panel-body">
+                <p><%= complaint.content %></p>
+            </div>
+            <div class="panel-footer">
+            	<%= link_to 'View', complaint, class:"btn btn-primary" %>
+            	<% if current_user == complaint.user %>
+            	   	<%= link_to 'Delete', complaint, method: :delete, class:"btn btn-danger" %>
+            	<% end %>
+            </div>
+        </div>
+
+
+
+<% end %>

@@ -11,18 +11,17 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-
 <%= render 'layouts/navigationbar' %>
 <div class="container">
 <div class="row">
-    <div class="col-lg-12">
-  		<div class="col-lg-8">
-  		<%= yield %>
-  		</div>
-  		<div class="col-lg-4">
-  		<%= render 'complaints/new' %>
-  		</div>
-	   </div>
+            <div class="col-lg-12">
+		<div class="col-lg-8">
+		<%= yield %>
+		</div>
+		<div class="col-lg-4">
+		<%= render '' %>
+		</div>
+	    </div>
 </div>
 </div>
 
