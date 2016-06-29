@@ -1,5 +1,5 @@
-class User < ActiveRecord::Base
+class User < ApplicationRecord
 	establish_connection :students_1617
-	self.primary_key = "id"
 	has_many :complaints, dependent: :destroy
+	has_many :messages, dependent: :destroy
 end

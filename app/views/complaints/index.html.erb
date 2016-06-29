@@ -1,20 +1,30 @@
-<% @complaints.each do |complaint| %>
+<div class="col-lg-8">
+	<% @complaints.each do |complaint| %>
 
-		<div class="panel panel-default">
-            <div class="panel-heading">
-                <h3><%= complaint.title %><small class="pull-right"><%= complaint.mess+' '+complaint.category %></small></h3><h4> <small>by <%= complaint.user.fullname.titleize %>  | <%= complaint.user.username %> | <span class="glyphicon glyphicon-time"></span> <%= (complaint.created_at+330.minutes).strftime("%d-%m-%y   %l:%M %p") %> </small></h4>
-            </div>
-            <div class="panel-body">
-                <p><%= complaint.content %></p>
-            </div>
-            <div class="panel-footer">
-            	<%= link_to 'View', complaint, class:"btn btn-primary" %>
-            	<% if current_user == complaint.user %>
-            	   	<%= link_to 'Delete', complaint, method: :delete, class:"btn btn-danger" %>
-            	<% end %>
-            </div>
-        </div>
+			<div class="panel panel-default">
+	            <div class="panel-heading">
+	                <h3><%= complaint.title %><small class="pull-right"><%= complaint.category.name %></small></h3><h4> <small>by <%= complaint.user.fullname.titleize %>  | <%= complaint.user.username %> | <span class="glyphicon glyphicon-time"></span> <%= (complaint.created_at+330.minutes).strftime("%d-%m-%y   %l:%M %p") %> </small></h4>
+	            </div>
+	            <div class="panel-body">
+	                <p><%= complaint.content %></p>
+	                <% if complaint.attachment.present? %>
+	                <%= link_to complaint.attachment_url do %>
+						<img src="<%= complaint.attachment_url %>" alt="attachment" width="200" />
+	                <% end %>
+	                <% end %>
+	            </div>
+	            <div class="panel-footer">
+	            	<%= link_to 'View', complaint, class:"btn btn-primary" %>
+	            	<% if current_user == complaint.user %>
+	            	   	<%= link_to 'Delete', complaint, method: :delete, class:"btn btn-danger" %>
+	            	<% end %>
+	            </div>
+	        </div>
 
 
 
-<% end %>
+	<% end %>
+</div>
+<div class="col-lg-4">
+<%= render 'complaints/new' %>
+</div>
