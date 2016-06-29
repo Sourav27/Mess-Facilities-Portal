@@ -5,11 +5,12 @@
 	<%= render @complaint.messages %>
 </div>
 
-<%= form_for @message, url: '#' do |f| %>
+<form id="new_message" >
   <div class="form-group">
-    <%= f.text_field :body, class: 'form-control' %>
+    <input name="message_body" id="message_body" class="form-control">
     <small class="text-muted">From 2 to 1000 characters</small>
   </div>
-
-  <%= f.submit "Send", class: 'btn btn-primary btn-lg' %>
-<% end %>
+  <div class="form-group">
+  	<input type="submit" class="btn btn-primary" form="new_message" value="Submit">
+  </div>
+</form>

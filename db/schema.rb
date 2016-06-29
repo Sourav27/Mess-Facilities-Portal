@@ -33,7 +33,7 @@ ActiveRecord::Schema.define(version: 20160629131824) do
 
   create_table "messages", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.text     "body",         limit: 65535
-    t.integer  "user_id"
+    t.integer  "user_id",                    null: false
     t.integer  "complaint_id"
     t.datetime "created_at",                 null: false
     t.datetime "updated_at",                 null: false
@@ -47,5 +47,4 @@ ActiveRecord::Schema.define(version: 20160629131824) do
   end
 
   add_foreign_key "messages", "complaints"
-  add_foreign_key "messages", "users"
 end
