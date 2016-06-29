@@ -13,6 +13,12 @@
 
 <%= render 'layouts/navbar' %>
 <div class="container">
+<% flash.each do |key, value| %>
+  <div class="alert alert-<%= key == "notice" ? "success" : "danger"%> fade in">
+  <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+  <%= content_tag :div,value, :id=> "flash_#{key}" %>
+  </div>
+<% end %>
 <div class="row">
     <div class="col-lg-12">
   		<%= yield %>

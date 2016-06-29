@@ -1,2 +1,15 @@
 <div class="page-header"><%= @complaint.title %></div>
 <div class="panel-body"><%= @complaint.content %></div>
+
+<div id="messages" data-complaint-id="<%= @complaint.id %>">
+	<%= render @complaint.messages %>
+</div>
+
+<%= form_for @message, url: '#' do |f| %>
+  <div class="form-group">
+    <%= f.text_field :body, class: 'form-control' %>
+    <small class="text-muted">From 2 to 1000 characters</small>
+  </div>
+
+  <%= f.submit "Send", class: 'btn btn-primary btn-lg' %>
+<% end %>

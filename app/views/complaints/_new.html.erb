@@ -8,7 +8,7 @@
     <option value="1">Mess</option>
     <option value="2">Facility</option>}
     </select>
-    <br>
+    <br><br>
 		<%= f.select "mess_id",options_from_collection_for_select(Category.where(type_id: '1'),"id","name"),{:prompt => "Select a mess"}, {:style => "display:none",:id => "mess"} %>
 		<%= f.select "facility_id",options_from_collection_for_select(Category.where(type_id: '2'),"id","name"),{:prompt => "Select a facility"}, {:style => "display:none",:id => "facility"} %>
 		<%= f.text_field :title, placeholder: "Title", class:"form-control" %><br>

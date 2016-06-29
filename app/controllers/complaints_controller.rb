@@ -11,7 +11,8 @@ class ComplaintsController < ApplicationController
 	end
 
 	def show
-		
+		@complaint = Complaint.includes(:messages).find(params[:id])
+		@message = Message.new
 	end
 
 	def create
@@ -29,7 +30,7 @@ class ComplaintsController < ApplicationController
 				format.html { redirect_to @complaint, notice: "Complaint registered successfully!" }
 				format.json { render :show, status: :created, location: @complaint }
 			else
-				format.html { render :new }
+				format.html { render :new, error: "Something went wrong. Please try again." }
 				format.json { render json: @complaint.errors, status: :unprocessable_entity }
 			end
 		end
