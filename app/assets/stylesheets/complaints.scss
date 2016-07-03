@@ -8,4 +8,13 @@
   .avatar {
     margin: 0.5rem;
   }
+  .card{
+  	padding-bottom: 1em;
+	.card-block{
+		background: #2ecc71;
+	}
+	.pull-right{
+		background: #4aa3df;
+	}
+  }
 }

@@ -10,8 +10,12 @@ jQuery(document).on('turbolinks:load', function() {
       channel: "ComplaintsChannel",
       complaint_id: messages.data('complaint-id')
     }, {
-      connected: function() {},
-      disconnected: function() {},
+      connected: function() {
+        console.log('Connected!');
+      },
+      disconnected: function() {
+        console.log('Disconnected!');
+      },
       received: function(data) {
         messages.append(data['message']);
         return messages_to_bottom();
@@ -27,7 +31,7 @@ jQuery(document).on('turbolinks:load', function() {
       var $this, textarea;
       $this = $(this);
       textarea = $this.find('#message_body');
-      if ($.trim(textarea.val()).length > 1) {
+      if ($.trim(textarea.val()).length > 0) {
         App.global_chat.send_message(textarea.val(), messages.data('complaint-id'));
         textarea.val('');
       }

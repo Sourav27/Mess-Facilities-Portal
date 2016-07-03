@@ -11,6 +11,7 @@ class ComplaintsController < ApplicationController
 	end
 
 	def show
+		console
 		@complaint = Complaint.includes(:messages).find(params[:id])
 		@message = Message.new
 	end
@@ -27,6 +28,7 @@ class ComplaintsController < ApplicationController
 
 		respond_to do |format|
 			if @complaint.save
+				@message = @complaint.messages.create!(body: @complaint.content, user_id: @complaint.user_id)
 				format.html { redirect_to @complaint, notice: "Complaint registered successfully!" }
 				format.json { render :show, status: :created, location: @complaint }
 			else
