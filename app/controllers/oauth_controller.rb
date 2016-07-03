@@ -25,7 +25,6 @@ helper_method :generate_auth_req
      		
      		session[:username]=@username
      		session[:user_id]=@user['id']
-     		cookies.signed[:user_id]=@user['id']
 			@student=User.find_by_username(@user['username'])
      		# log_in @student
 			redirect_back_or root_path

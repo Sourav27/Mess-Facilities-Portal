@@ -8,10 +8,14 @@ module ApplicationCable
   		logger.add_tags 'ActionCable', current_user.username
   	end
 
+  	def session
+      cookies.encrypted[Rails.application.config.session_options[:key]]
+    end
+
   	protected
 
   	def find_verified_user
-  		if verified_user = User.find_by(id: cookies.signed[:user_id])
+  		if verified_user = User.find_by(id: session["user_id"])
   			verified_user
   		else
   			reject_unauthorized_connection
