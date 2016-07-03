@@ -17,7 +17,16 @@ jQuery(document).on('turbolinks:load', function() {
         console.log('Disconnected!');
       },
       received: function(data) {
-        messages.append(data['message']);
+        var reciever_id = $('meta[name=user-id]').attr("content");
+        $html = $(data['message']);
+        $id = data['user_id'];
+        if(reciever_id == $id){
+          $html.find(".card-block").addClass("pull-right");  
+        }
+        else{
+          $html.find(".card-block").addClass("pull-left");
+        }
+        messages.append($html);
         return messages_to_bottom();
       },
       send_message: function(message, complaint_id) {
