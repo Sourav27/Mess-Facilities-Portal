@@ -11,7 +11,6 @@ class ComplaintsController < ApplicationController
 	end
 
 	def show
-		console
 		@complaint = Complaint.includes(:messages).find(params[:id])
 		@message = Message.new
 	end

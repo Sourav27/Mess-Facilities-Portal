@@ -9,6 +9,6 @@ class ComplaintsChannel < ApplicationCable::Channel
   end
 
   def send_message(data)
-  	Message.create!(body: data['message'], complaint_id: data['complaint_id'], user_id: current_user.id)
+  	MessageBroadcastJob.perform_later(data, current_user)
   end
 end
