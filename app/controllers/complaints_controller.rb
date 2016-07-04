@@ -12,6 +12,7 @@ class ComplaintsController < ApplicationController
 
 	def show
 		@complaint = Complaint.includes(:messages).find(params[:id])
+		@date = @complaint.messages.first.date
 		@message = Message.new
 	end
 

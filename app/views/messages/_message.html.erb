@@ -1,10 +1,15 @@
+<% if @complaint.messages.first == message || @date != message.date %>
+	<div class="date"><%= message.date %></div>
+	<% @date = message.date %>
+<% end %>
 <div class="card">
     <div class="row" style="margin: 0;">
       
-      <div class="col-md-3 card-block <% if current_user==message.user %>pull-right<%else%>pull-left<%end%>">
+      <div class="card-block <% if current_user==message.user %>self<%else%>other<%end%>">
         <p class="card-text">
-          <span class="text-muted"><%= message.user.username %> at <%= message.timestamp %> says</span><br>
-          <%= message.body %>
+          <span class="stamp"><%= message.user.username %></span><br>
+          <%= message.body %><br>
+          <small class="pull-right"><%= message.timestamp %></small>
         </p>
       </div>
     </div>
