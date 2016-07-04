@@ -5,11 +5,11 @@
 
 <form id="new_message" >
   <div class="form-group">
-  	<div class="col-md-11">
-    <input name="message_body" id="message_body" class="form-control" autofocus>
+  	<div class="col-md-11" style="padding-left:0;">
+    <input name="message_body" id="message_body" class="form-control" placeholder="Type a message and press Enter to send" autofocus  autocomplete="off">
   	</div>
-  	<div class="col-md-1">
-  	<input type="submit" class="btn btn-primary" form="new_message" value="Submit">
+  	<div class="col-md-1" style="padding-right:0;">
+  	<button type="submit" class="btn btn-primary" form="new_message" value="Send"><span class="glyphicon glyphicon-send"></span>&nbsp;Send</button>
   	</div>
   </div>
 </form>

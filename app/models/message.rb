@@ -4,6 +4,10 @@ class Message < ApplicationRecord
   validates :body, presence: true, length: {minimum: 1, maximum: 1000}
 
   def timestamp
-    created_at.strftime('%H:%M:%S %d %B %Y')
+    created_at.strftime('%H:%M')
+  end
+
+  def date
+  	created_at.strftime('%d %B %Y')
   end
 end

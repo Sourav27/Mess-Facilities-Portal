@@ -1,10 +1,14 @@
+<% if date != message.date %>
+	<div class="date"><%= message.date %></div>
+<% end %>
 <div class="card">
     <div class="row" style="margin: 0;">
       
-      <div class="col-md-3 card-block">
+      <div class="card-block">
         <p class="card-text">
-          <span class="text-muted"><%= message.user.username %> at <%= message.timestamp %> says</span><br>
-          <%= message.body %>
+          <span class="stamp"><%= message.user.username %></span><br>
+          <%= message.body %><br>
+          <small class="pull-right"><%= message.timestamp %></small>
         </p>
       </div>
     </div>

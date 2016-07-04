@@ -21,10 +21,10 @@ jQuery(document).on('turbolinks:load', function() {
         $html = $(data['message']);
         $id = data['user_id'];
         if(reciever_id == $id){
-          $html.find(".card-block").addClass("pull-right");  
+          $html.find(".card-block").addClass("self");  
         }
         else{
-          $html.find(".card-block").addClass("pull-left");
+          $html.find(".card-block").addClass("other");
         }
         messages.append($html);
         return messages_to_bottom();
