@@ -12,4 +12,7 @@
       </ul>
     </div>
   </div>
+
+<%else%>
+<%= link_to "sign in",  @auth_url %>
 <%end%>
