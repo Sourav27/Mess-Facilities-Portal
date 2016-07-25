@@ -1,9 +1,9 @@
 <div class="col-lg-8">
 	<% @complaints.each do |complaint| %>
 
-			<div class="panel panel-default">
+			<div class="panel panel-default" <% if @lasttime!=nil %><% if @lasttime<complaint.created_at %>style="background-color:#1bbc9b !important"<% end %><% end %>   >
 	            <div class="panel-heading">
-			<% if @lasttime!=nil %><% if @lasttime<complaint.created_at %><div class="alert alert-success">NEW COMPLAINT</div><% end %><% end %>
+			
 	                <h3><%= complaint.title %><small class="pull-right"><%= complaint.category.name %></small></h3><h4> <small>by <%= complaint.user.fullname.titleize %>  | <%= complaint.user.username %> | <span class="glyphicon glyphicon-time"></span> <%= (complaint.created_at+330.minutes).strftime("%d-%m-%y   %l:%M %p") %> </small></h4>
 	            </div>
 	            <div class="panel-body">
