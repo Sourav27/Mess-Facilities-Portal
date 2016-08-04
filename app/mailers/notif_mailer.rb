@@ -1,8 +1,8 @@
 class NotifMailer < ApplicationMailer
-	def notif(user,title,content)
+	def notif(user,title,url)
 		@user = user
 		@title = title
-		@content = content
+		@url = url
 		@smail=user+"@smail.iitm.ac.in"
 		mail(to: @smail, subject: @title)
 	end
