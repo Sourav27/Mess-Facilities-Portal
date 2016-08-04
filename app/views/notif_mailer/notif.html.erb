@@ -4,10 +4,12 @@
     <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
   </head>
   <body>
-    <h1>Hi <%= @user %></h1>
+    <h1>Hi <%= @user.upcase %>!</h1>
     <p>
-	Your complaint registered successfully
-	" <%= @content %> "
+	Your complaint registered successfully!
+    </p>
+    <p>
+    You can follow all the updates to your post <a href='<%= @url %>'>here</a>.
     </p>
   </body>
 </html>
