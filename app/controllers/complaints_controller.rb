@@ -41,7 +41,7 @@ class ComplaintsController < ApplicationController
 			if @complaint.save
 				@message = @complaint.messages.create!(body: @complaint.content, user_id: @complaint.user_id)
 				@username=session[:username].downcase
-				NotifMailer.notif(@username,@complaint.title,@complaint.content).deliver_now
+				NotifMailer.notif(@username,@complaint.title,@complaint.content).deliver_later
 				format.html { redirect_to @complaint, notice: "Complaint registered successfully!" }
 				format.json { render :show, status: :created, location: @complaint }
 			else
@@ -61,6 +61,10 @@ class ComplaintsController < ApplicationController
 		end
 	end
 
+	def all
+		@complaints = Complaint.order('created_at desc').all
+	end
+	
 	private
 
 	def set_complaint
