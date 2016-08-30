@@ -13,7 +13,6 @@
 		<%= f.select "facility_id",options_from_collection_for_select(Category.where(type_id: '2'),"id","name"),{:prompt => "Select a facility"}, {:style => "display:none",:id => "facility"} %>
 		<%= f.text_field :title, placeholder: "Title", class:"form-control" %><br>
 		<%= f.text_area :content, placeholder: "Content", class:"form-control" %><br>
-		<%= f.file_field :attachment %><br><br>
     <%= f.submit :Submit, class: "btn btn-primary"%>
 	<% end %>
 <% end %>

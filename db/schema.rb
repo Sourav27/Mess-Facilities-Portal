@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160705083014) do
+ActiveRecord::Schema.define(version: 20160828072126) do
 
   create_table "categories", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string  "name",      null: false
@@ -23,12 +23,19 @@ ActiveRecord::Schema.define(version: 20160705083014) do
     t.string   "title",                                     null: false
     t.text     "content",     limit: 65535,                 null: false
     t.integer  "category_id",                               null: false
-    t.string   "attachment"
     t.boolean  "solved",                    default: false, null: false
     t.datetime "created_at",                                null: false
     t.datetime "updated_at",                                null: false
     t.index ["category_id"], name: "index_complaints_on_category_id", using: :btree
     t.index ["user_id"], name: "index_complaints_on_user_id", using: :btree
+  end
+
+  create_table "members", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string "username",   null: false
+    t.string "name",       null: false
+    t.string "email",      null: false
+    t.string "mobile",     null: false
+    t.string "categories", null: false
   end
 
   create_table "messages", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
