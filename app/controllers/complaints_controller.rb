@@ -7,7 +7,7 @@ class ComplaintsController < ApplicationController
 			@ids = Member.find_by(username: current_user.username).categories
 			if !@ids.nil?
 				@ids = @ids.split(",")
-				@complaints = Complaint.where('category_id = :ids OR user_id = :userid', ids: @ids, userid: current_user.id)
+				@complaints = Complaint.where('category_id = :ids OR user_id = :userid', ids: @ids, userid: current_user.id).order('created_at desc')
 			end
 		else
 			@complaints = current_user.complaints.order('created_at desc').all
@@ -31,9 +31,13 @@ class ComplaintsController < ApplicationController
 
 	def show
 		@complaint = Complaint.includes(:messages).find(params[:id])
-		if is_member? or is_owner?
+		if is_relaventmember? or is_owner?
 			@date = @complaint.messages.first.date
 			@message = Message.new
+		else
+			respond_to do |format|
+				format.html {redirect_to complaints_url, alert: "You are not authorized!"}
+			end
 		end
 	end
 
@@ -61,8 +65,20 @@ class ComplaintsController < ApplicationController
 		end
 	end
 
+	def resolve
+		@complaint = Complaint.find(params[:id])
+		@complaint.solved = true
+		if @complaint.save
+			respond_to do |format|
+				format.html {redirect_to complaints_url, notice: "Complaint Resolved!"}
+			end
+		else
+			redirect_to @complaint
+		end
+	end
+
 	def destroy
-		if(current_user == @complaint.user)
+		if is_relaventmember? or is_owner?
 			@complaint.destroy
 			respond_to do |format|
 				format.html {redirect_to complaints_url, notice: "Complaint deleted successfully!"}
@@ -84,13 +100,35 @@ class ComplaintsController < ApplicationController
 	def authenticate_user!
 		unless logged_in?
 		  store_location
-		  redirect_to url_for(:controller=>'oauth',:action=>'index'), alert: "You need to sign in before continuing."
+		  redirect_to url_for(:controller=>'sessions',:action=>'new'), alert: "You need to sign in before continuing."
 		end
 	end
 
 	def is_member?
-		if Member.where(username: current_user.username)
+		if Member.where(username: current_user.username).present?
 			return true
+		else
+			return false
+		end
+	end
+
+	def is_relaventmember?
+		if Member.where(username: current_user.username).present?
+			@ids = Member.find_by(username: current_user.username).categories
+			if !@ids.nil?
+				@ids = @ids.split(",")
+				@ids.each do |value|
+					@tempid = Complaint.find(params[:id]).category_id
+				    if value.to_i==@tempid
+				    	return true 
+				    else
+				    	return false
+				    end
+				end
+			else
+				return false
+			end
+
 		else
 			return false
 		end
