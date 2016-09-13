@@ -56,6 +56,16 @@ class ComplaintsController < ApplicationController
 				@message = @complaint.messages.create!(body: @complaint.content, user_id: @complaint.user_id)
 				@username=session[:username].downcase
 				NotifMailer.notif(@username,@complaint.title,complaint_url(@complaint)).deliver_later
+				@relaventmembers = Member.all
+				@relaventmembers.each do |relmember|
+				    	@id = relmemeber.categories.split(",")
+					@id.each do |catid|
+					    if catid.to_i==@complaint.category_id
+					    	NotifMailer.coordnotif(relmember.email,@complaint.title,complaint_url(@complaint)).deliver_later
+					end
+					end
+				end
+				
 				format.html { redirect_to @complaint, notice: "Complaint registered successfully!" }
 				format.json { render :show, status: :created, location: @complaint }
 			else
