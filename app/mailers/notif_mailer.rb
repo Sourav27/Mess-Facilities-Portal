@@ -6,4 +6,11 @@ class NotifMailer < ApplicationMailer
 		@smail=user+"@smail.iitm.ac.in"
 		mail(to: @smail, subject: @title)
 	end
+	
+	def coordnotif(user,title,url)
+		@user = user
+		@title = title
+		@url = url
+		mail(to: @user, subject: @title)
+	end
 end
