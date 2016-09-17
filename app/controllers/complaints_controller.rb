@@ -58,11 +58,11 @@ class ComplaintsController < ApplicationController
 				NotifMailer.notif(@username,@complaint.title,complaint_url(@complaint)).deliver_later
 				@relaventmembers = Member.all
 				@relaventmembers.each do |relmember|
-				    	@id = relmemeber.categories.split(",")
+				    @id = relmember.categories.split(",")
 					@id.each do |catid|
 					    if catid.to_i==@complaint.category_id
 					    	NotifMailer.coordnotif(relmember.email,@complaint.title,complaint_url(@complaint)).deliver_later
-					end
+					    end
 					end
 				end
 				
