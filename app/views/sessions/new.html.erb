@@ -1,0 +1,89 @@
+<style type="text/css">
+    .wrapper{
+        margin-top: 3em;
+        width:70%;
+        max-width: 450px;
+        box-sizing: border-box;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        border:1px solid grey;
+        padding: 1em 2em 1em 2em;
+        background-color:#ffffff;
+    }
+    .img-center{
+        box-sizing: border-box;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    p{
+        color: #0b333f;
+        font-size: 22px;
+        font-weight: 550;
+        text-align: center;
+    }
+    i {
+        position: absolute;
+        top: 1px;
+        left: 1px;
+        bottom: 1px;
+        padding-top: 8px;
+        width: 40px;
+        font-size: 20px;
+        border-radius: 4px 0 0 4px;
+        text-align: center;
+        color: #979faf;
+    }
+
+    .inner-addon { 
+        position: relative; 
+    }
+
+/* style icon */
+    .inner-addon .glyphicon {
+        position: absolute;
+        padding: 10px;
+        pointer-events: none;
+  /*background-color: #a0b3b0;*/
+    }
+    input::-webkit-input-placeholder { /* WebKit browsers */
+        padding: 0.3em;
+    }
+    input:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+        padding: 0.3em;
+    }
+    input::-moz-placeholder { /* Mozilla Firefox 19+ */
+        padding: 0.3em;
+    }
+    input:-ms-input-placeholder { /* Internet Explorer 10+ */
+        padding: 0.3em;
+    }
+
+/* align icon */
+    .left-addon .glyphicon  { left:  0px;}
+
+/* add padding  */
+    .left-addon input {
+        padding-left:3em;
+        height: 3em;
+    }
+</style>
+<div class="container">
+<div class="wrapper">
+    <%= image_tag("IIT M.png",:class => "image-responsive img-center img-cirlce",:size => "100x100") %>
+    <br>
+    <p>Mess Facilities Portal</p>
+    <%= form_for(:session, url: sessions_path, method: 'post' , :html => { :class => "form-horizontal",novalidate:true}) do |f| %>
+    <div class="form-group inner-addon left-addon">
+        <i class="glyphicon glyphicon-user"></i>
+        <%= f.text_field :roll, placeholder:"Roll No.",class:"form-control",required:true %>
+    </div> 
+    <div class="form-group inner-addon left-addon">
+        <i class="glyphicon glyphicon-lock"></i>
+        <%= f.password_field :password,class:"form-control", placeholder:"Password",required:true %>
+    </div>
+    <%= f.submit "Sign in", class: "btn btn-large btn-primary img-center",:id=>"login-sub" %>
+<% end %>
+</div>
+</div>
