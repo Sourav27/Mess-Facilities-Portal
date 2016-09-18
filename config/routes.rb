@@ -9,5 +9,6 @@ Rails.application.routes.draw do
 	# delete 'logout'=>'oauth#signout'
 
 	get 'resolve' => 'complaints#resolve'
+	post 'all' => 'sessions#all'
 	mount ActionCable.server => '/cable'
 end

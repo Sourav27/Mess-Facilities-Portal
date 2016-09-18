@@ -58,6 +58,16 @@ require 'net/ldap'
        end
   end
 
+  def all
+    @password = params[:session][:password]
+    if @password == ""
+      allcomplaints_sign_in
+      redirect_to complaints_all_url
+    else
+      redirect_to complaints_all_url
+    end
+  end
+
   def destroy
     sign_out 
     redirect_to root_url

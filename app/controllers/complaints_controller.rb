@@ -1,6 +1,6 @@
 class ComplaintsController < ApplicationController
 	before_action :set_complaint, only: [:show,:destroy]
-	before_action :authenticate_user!
+	before_action :authenticate_user!, except: [:all]
 
 	def index
 		if is_member?
@@ -12,7 +12,7 @@ class ComplaintsController < ApplicationController
 		else
 			@complaints = current_user.complaints.order('created_at desc').all
 		end
-		@username=session[:username]
+		@username=current_user.username
 		@notif = Notification.find_by_user(@username)
 		if @notif != nil
 			@lasttime = @notif.time
@@ -54,7 +54,7 @@ class ComplaintsController < ApplicationController
 		respond_to do |format|
 			if @complaint.save
 				@message = @complaint.messages.create!(body: @complaint.content, user_id: @complaint.user_id)
-				@username=session[:username].downcase
+				@username=current_user.username.downcase
 				NotifMailer.notif(@username,@complaint.title,complaint_url(@complaint)).deliver_later
 				@relaventmembers = Member.all
 				@relaventmembers.each do |relmember|
