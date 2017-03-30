@@ -16,3 +16,11 @@
 //= require cable
 //= require turbolinks
 //= require_tree .
+$(function(){
+	$('#month').change(function(){
+		$('form#date').trigger('submit.rails');
+	});
+	$('#year').change(function(){
+		$('form#date').trigger('submit.rails');
+	});
+});

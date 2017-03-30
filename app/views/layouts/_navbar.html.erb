@@ -14,9 +14,10 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li><%= link_to "Home",  root_path %></li>
-        <li><%= link_to "All complaints",  complaints_all_path %></li>
-      </ul>
+        <li><%= link_to "My complaints",  root_path %></li>
+        <!--<li><%= link_to "All complaints",  complaints_all_path %></li> --> 
+	<li><%= link_to "Students Home", "https://students.iitm.ac.in" %></li>
+     </ul>
       <ul class="nav navbar-nav navbar-right">
 	<%if logged_in? %>
 		<li class="dropdown">

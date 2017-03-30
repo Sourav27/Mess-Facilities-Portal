@@ -6,8 +6,13 @@
       
       <div class="card-block">
         <p class="card-text">
-          <span class="stamp"><%= message.user.username %></span><br>
-          <%= message.body %><br>
+	<% member = Member.find_by(username: message.user_id) %>
+        <% if member.present?%>
+          <span class="stamp"><%= User.find_by(username: message.user_id).fullname%> | <%=member.position %></span><br>
+        <% else %>
+        <span class="stamp"><%= User.find_by(username: message.user_id).fullname%> | <%=message.user_id %></span><br>
+        <% end %>
+	<%= message.body %><br>
           <small class="pull-right"><%= message.timestamp %></small>
         </p>
       </div>

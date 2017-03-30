@@ -1,5 +1,7 @@
 class SessionsController < ApplicationController
 require 'net/ldap'
+before_action :alreadyloggedin, only: [:new]
+
  def new
  end
 
@@ -13,9 +15,8 @@ require 'net/ldap'
         if k  
         	sign_in @user
         	redirect_back_or root_url
-        	flash[:success] = "Welcome, #{@user[:fullname]}"
         else
-         	redirect_to root_path,:flash => {:error => "Username can't be empty"}
+         	redirect_to login_path, alert:"Invalid username or password"
         
        end
 
@@ -43,14 +44,13 @@ require 'net/ldap'
                  @user = User.find_by(username: params[:session][:roll])
                  if @user
                    sign_in @user
-                   redirect_back_or root_path
+                   redirect_back_or root_url
                   # flash[:success] = "Welcome, #{@user[:fullname]}"
                  else
-                   redirect_to root_path
-                   flash[:error] = "Sorry, such a user does not exist in our database."
+                   redirect_to login_path, alert: "Sorry, such a user does not exist in our database."
                  end
                else
-                 redirect_to root_path, :flash => {:error => "Invalid username or password"}
+                 redirect_to login_path, alert: "Invalid username or password"
                end
              end
            end
@@ -59,12 +59,13 @@ require 'net/ldap'
   end
 
   def all
-    @password = params[:session][:password]
-    if @password == ""
-      allcomplaints_sign_in
+    @password = Digest::MD5.hexdigest(params[:session][:password])
+    @admin = Admin.find_by(password_digest: @password)
+    if @admin.present?  
+      session[:admin] = @admin.id
       redirect_to complaints_all_url
     else
-      redirect_to complaints_all_url
+      redirect_to complaints_all_url, alert:"Invalid password"
     end
   end
 
@@ -72,4 +73,11 @@ require 'net/ldap'
     sign_out 
     redirect_to root_url
   end
+  def alreadyloggedin
+    if current_user.present?
+	redirect_to root_url
+    end
+  end
 end
+
+

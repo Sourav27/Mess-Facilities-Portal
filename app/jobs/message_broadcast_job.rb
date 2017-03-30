@@ -2,9 +2,9 @@ class MessageBroadcastJob < ApplicationJob
   queue_as :default
 
   def perform(data, user)
-  	date = Complaint.find(data['complaint_id']).messages.last.date
-  	message = Message.create!(body: data['message'], complaint_id: data['complaint_id'], user_id: user.id)
-    ActionCable.server.broadcast "complaints_#{message.complaint_id}_channel", message: render_message(message,date), user_id: user.id
+  	date = Message.where(relation: data['complaint_relation']).last.date
+  	message = Message.create!(body: data['message'], relation: data['complaint_relation'], user_id: user.username)
+    ActionCable.server.broadcast "complaints_#{message.relation}_channel", message: render_message(message,date), user_id: user.username
   end
 
   private
@@ -14,3 +14,4 @@ class MessageBroadcastJob < ApplicationJob
   end
 
 end
+

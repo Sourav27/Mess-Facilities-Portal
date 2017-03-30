@@ -14,10 +14,6 @@ module SessionsHelper
     self.current_user = nil
   end
 
-  def allcomplaints_sign_in
-  	session[:admin] = '1'
-  end
-
   def logged_in?
     !current_user.nil?
   end
@@ -32,7 +28,7 @@ module SessionsHelper
   end
 
   def redirect_back_or(default)
-    redirect_to(session[:forwarding_url] || default)
+    redirect_to (session[:forwarding_url] || default) , notice: "Welcome, #{@user.fullname.titleize}"
     session.delete(:forwarding_url)
   end
 

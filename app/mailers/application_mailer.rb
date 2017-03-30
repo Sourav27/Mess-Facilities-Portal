@@ -1,4 +1,4 @@
 class ApplicationMailer < ActionMailer::Base
-	default from: 'webops@smail.iitm.ac.in'
+	default from: "Mess and Facilities Portal <noreplymessfacilities@gmail.com>" #Institute WebOps <webops@smail.iitm.ac.in>"
 	layout 'mailer'
 end

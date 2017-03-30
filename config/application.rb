@@ -11,6 +11,7 @@ module MessFacilitiesPortal
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
+    #config.action_controller.relative_url_root = "/mess-facilities"
     config.time_zone = 'Chennai'
     config.active_record.default_timezone = :local
   end

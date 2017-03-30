@@ -2,8 +2,21 @@
 <% if logged_in? %>
 
 <h1>Register a new complaint</h1>
-	<%= form_for(:complaint, url: complaints_path, method: :post) do |f| %>
-		<select id="complaint_category" name="complaint[category]">
+	<%= form_for(@complaint, url: complaints_path, method: :post) do |f| %>		
+<% if @complaint.errors.any? %>
+    <div id="error_explanation" class="alert alert-danger alert-dismissable">
+      <button type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <h4><%= pluralize(@complaint.errors.count, "error") %> prohibited this complaint from being saved:</h4>
+
+      <ul>
+      <% @complaint.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+	
+<select id="complaint_category_type" name="complaint[category_type]">
     <option value="">Select a category</option>
     <option value="1">Mess</option>
     <option value="2">Facility</option>}
@@ -11,14 +24,21 @@
     <br><br>
 		<%= f.select "mess_id",options_from_collection_for_select(Category.where(type_id: '1'),"id","name"),{:prompt => "Select a mess"}, {:style => "display:none",:id => "mess"} %>
 		<%= f.select "facility_id",options_from_collection_for_select(Category.where(type_id: '2'),"id","name"),{:prompt => "Select a facility"}, {:style => "display:none",:id => "facility"} %>
+		<%= f.collection_radio_buttons :complaint_category_ids, ComplaintCategory.all, :id, :name,{include_hidden: false} do |x|%>
+			<div class="collection-radio-button">
+				<%= x.radio_button %>
+				<%= x.label %>
+			</div>
+		<% end %>
 		<%= f.text_field :title, placeholder: "Title", class:"form-control" %><br>
 		<%= f.text_area :content, placeholder: "Content", class:"form-control" %><br>
-    <%= f.submit :Submit, class: "btn btn-primary"%>
+    		<%= f.label :contacted, "Check this box if you have informed to mess/facilities managers prior to this complaint: " %><%= f.check_box :contacted %><br>
+	<%= f.submit :Submit, class: "btn btn-primary"%>
 	<% end %>
 <% end %>
 <script type="text/javascript">
   $(function () {
-    $("#complaint_category").change(function () {
+    $("#complaint_category_type").change(function () {
         var category = $(this).val();
         if (category == "1") {
           $("#mess").show();
@@ -35,6 +55,11 @@
 	  console.log("hide");
         }
     });
+    $('input[type="submit"]').prop('disabled', true); // disabled by default
 
+    $('#complaint_contacted').click(function() {
+       // change on checkbox click
+       $('input[type="submit"]').prop('disabled', !$('#complaint_contacted').prop('checked'));
+    });
   });
 </script>

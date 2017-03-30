@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta content='<%= logged_in? ? current_user.id : "" %>' name='user-id'/>
+    <meta content='<%= logged_in? ? current_user.username : "" %>' name='user-id'/>
   <title>Mess Facilities Portal</title>
   <%= csrf_meta_tags %>
   <%= favicon_link_tag %>
@@ -27,6 +27,6 @@
 	   </div>
 </div>
 </div>
-
+<footer style="position: fixed; bottom: 0;"><div class="container">Copyrights &copy; Institute WebOps</div></footer>
 </body>
 </html>

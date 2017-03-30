@@ -4,12 +4,19 @@
     <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
   </head>
   <body>
-    <h1>Hi <%= @user.upcase %>!</h1>
+    <p>Dear <%= @name %> (<%=@user.upcase%>),</p>
     <p>
-	Your complaint was registered successfully!
+	Your complaint was registered successfully! This complaint has been forwarded to respective caterers/vendors and coordinators, who will contact you soon to get the issue sorted out.
     </p>
+    <hr>
     <p>
-    You can follow all the updates to your post <a href='<%= @url %>'>here</a>.
+    <b> <%= @title %> </b><br><br><q><%= @content %></q>
     </p>
+    <hr>
+    <p>
+    You can follow all the updates to your post <a href='<%= @url %>' target="_blank">here</a> or by downloading our app from <a href="https://play.google.com/store/apps/details?id=in.ac.iitm.students">Google Play Store</a>.
+    </p>
+    <p>Sent from Mess Facilities Portal</p>
+    <p>Contact us at <a href="mailto:institutewebops@gmail.com" target="_blank">institutewebops@gmail.com</a> for any queries or suggestions.</p>
   </body>
 </html>

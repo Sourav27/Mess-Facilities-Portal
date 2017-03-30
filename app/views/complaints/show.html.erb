@@ -2,11 +2,11 @@
 <% if @complaint.solved==false %>
 <%= link_to "Resolve",{ :controller => :complaints, :action => :resolve,:id => @complaint.id}, { class: "btn btn-success btn-lg pull-right" } %>
 <% else %>
-<span class="badge pull-right">Resolved</span>
-<% end %></h1>
-</div>
-<div id="messages" data-complaint-id="<%= @complaint.id %>">
-	<%= render @complaint.messages %>
+<span class="badge">Resolved (<%= User.find_by(username: @complaint.resolved_by).fullname.titleize%>)</span>
+<% end %><small class="pull-right" style="margin-top:15px; margin-right:10px;"><%=ComplaintCategory.find(@complaint.complaint_category_ids).name%> @ <%= @complaint.category.name %></div>
+</small></h1>
+<div id="messages" data-complaint-relation="<%= @complaint.relation %>">
+	<%= render Message.where(relation: @complaint.relation) %>
 </div>
 
 <% if @complaint.solved==false %>
@@ -26,7 +26,7 @@
 <form id="new_message" >
   <div class="form-group">
   	<div class="col-md-11" style="padding-left:0;">
-    <input name="message_body" id="message_body" class="form-control" placeholder="Type a message and press Enter to send" autofocus  autocomplete="off" disabled="true">
+    <input name="message_body" id="message_body" class="form-control" placeholder="This complaint has been resolved. No further conversation is required." autofocus  autocomplete="off" disabled="true">
   	</div>
   	
 	<div class="col-md-1" style="padding-right:0;">
@@ -36,3 +36,5 @@
   </div>
 </form>
 <% end %>
+<p style="font-size: 13px;position: absolute;color: grey;bottom: -29px;"><strong>Notice: Refresh page if chat doesn't work. If it still persists, logout and login again. Contact us at <a href="mailto:institutewebops@gmail.com" target="_blank">institutewebops@gmail.com</a> for further assistance.</strong></p>
+

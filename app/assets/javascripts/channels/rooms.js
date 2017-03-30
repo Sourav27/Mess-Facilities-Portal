@@ -8,7 +8,7 @@ jQuery(document).on('turbolinks:load', function() {
     messages_to_bottom();
     App.global_chat = App.cable.subscriptions.create({
       channel: "ComplaintsChannel",
-      complaint_id: messages.data('complaint-id')
+      complaint_relation: messages.data('complaint-relation')
     }, {
       connected: function() {
         console.log('Connected!');
@@ -29,10 +29,10 @@ jQuery(document).on('turbolinks:load', function() {
         messages.append($html);
         return messages_to_bottom();
       },
-      send_message: function(message, complaint_id) {
+      send_message: function(message, complaint_relation) {
         return this.perform('send_message', {
           message: message,
-          complaint_id: complaint_id
+          complaint_relation: complaint_relation
         });
       }
     });
@@ -41,7 +41,7 @@ jQuery(document).on('turbolinks:load', function() {
       $this = $(this);
       textarea = $this.find('#message_body');
       if ($.trim(textarea.val()).length > 0) {
-        App.global_chat.send_message(textarea.val(), messages.data('complaint-id'));
+        App.global_chat.send_message(textarea.val(), messages.data('complaint-relation'));
         textarea.val('');
       }
       e.preventDefault();
@@ -49,3 +49,4 @@ jQuery(document).on('turbolinks:load', function() {
     });
   }
 });
+

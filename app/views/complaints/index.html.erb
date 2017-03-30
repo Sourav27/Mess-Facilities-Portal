@@ -1,9 +1,8 @@
 <div class="col-lg-8">
 	<% @complaints.each do |complaint| %>
-
-			<div <% if @lasttime!=nil %><% if @lasttime<complaint.created_at %> class="panel panel-success"<%else%> class="panel panel-default"<% end %><%else%> class="panel panel-default"<% end %>   >
+	<div <%  if @lasttime!=nil %><% if @lasttime<complaint.created_at %> class="panel panel-success"<%else%> class="panel panel-default"<% end %><%else%> class="panel panel-default"<% end %>   >
 	            <div class="panel-heading">
-	                <h3><%= complaint.title %>&nbsp;&nbsp;<% if complaint.solved%><span class="badge">Resolved</span><% end %><small class="pull-right"><%= complaint.category.name %></small></h3><h4> <small>by <%= complaint.user.fullname.titleize %>  | <%= complaint.user.username %> | <span class="glyphicon glyphicon-time"></span> <%= (complaint.created_at+330.minutes).strftime("%d-%m-%y   %l:%M %p") %> </small><span class="badge pull-right"><%= complaint.messages.count %></span></h4>
+	                <h3><%= complaint.title %>&nbsp;&nbsp;<% if complaint.solved%><span class="badge">Resolved (<%= User.find_by(username: complaint.resolved_by).fullname.titleize%>)</span><% end %><small class="pull-right"><%=ComplaintCategory.find(complaint.complaint_category_ids).name%> @ <%= complaint.category.name %></small></h3><h4> <small>by <%= User.find_by(username: complaint.user_id).fullname.titleize %>  | <%= complaint.user_id %> | <%= complaint.contacted ? "Already contacted authorities":"Did not contact authorities"%> | <span class="glyphicon glyphicon-time"></span> <%= (complaint.created_at).strftime("%d-%m-%y   %l:%M %p") %> </small><span class="badge pull-right"><%= Message.where(relation: complaint.relation).count %></span></h4>
 	            </div>
 	            <div class="panel-body">
 	                <p><%= complaint.content %></p>
@@ -20,6 +19,8 @@
 
 	<% end %>
 </div>
-<div class="col-lg-4">
-<%= render 'complaints/new' %>
+<div class="col-lg-4" id="register">
+<%= render 'new' %>
 </div>
+
+

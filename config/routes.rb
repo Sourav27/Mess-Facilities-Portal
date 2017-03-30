@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-	resources :complaints, only: [:index, :new, :create, :destroy, :show]
+        resources :complaints, only: [:index, :new, :create, :destroy, :show]
 	get 'complaints_all' => 'complaints#all'
 	root 'complaints#index'
 	get 'login' => 'sessions#new'
@@ -10,5 +10,5 @@ Rails.application.routes.draw do
 
 	get 'resolve' => 'complaints#resolve'
 	post 'all' => 'sessions#all'
-	mount ActionCable.server => '/cable'
+	mount ActionCable.server => '/mess-facilities/cable'
 end
