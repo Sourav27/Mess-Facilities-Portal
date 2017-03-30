@@ -1,0 +1,20 @@
+current directory: /var/railsapps/Mess-Facilities-Portal/vendor/bundle/ruby/2.3.0/gems/passenger-5.0.30/src/helper-scripts/download_binaries
+/home/user2015/.rvm/rubies/ruby-2.3.1/bin/ruby -r ./siteconf20160917-29101-16dlewe.rb extconf.rb
+Attempting to download https://oss-binaries.phusionpassenger.com/binaries/passenger/by_release/5.0.30/rubyext-ruby-2.3.1-x86_64-linux.tar.gz into /var/railsapps/Mess-Facilities-Portal/vendor/bundle/ruby/2.3.0/gems/passenger-5.0.30/download_cache
+*** Could not download https://oss-binaries.phusionpassenger.com/binaries/passenger/by_release/5.0.30/rubyext-ruby-2.3.1-x86_64-linux.tar.gz: The requested URL returned error: 404 Not Found
+Attempting to download https://s3.amazonaws.com/phusion-passenger/binaries/passenger/by_release/5.0.30/rubyext-ruby-2.3.1-x86_64-linux.tar.gz into /var/railsapps/Mess-Facilities-Portal/vendor/bundle/ruby/2.3.0/gems/passenger-5.0.30/download_cache
+*** Could not download https://s3.amazonaws.com/phusion-passenger/binaries/passenger/by_release/5.0.30/rubyext-ruby-2.3.1-x86_64-linux.tar.gz: The requested URL returned error: 403 Forbidden
+Attempting to download https://oss-binaries.phusionpassenger.com/binaries/passenger/by_release/5.0.30/nginx-1.10.1-x86_64-linux.tar.gz into /var/railsapps/Mess-Facilities-Portal/vendor/bundle/ruby/2.3.0/gems/passenger-5.0.30/download_cache
+Attempting to download https://oss-binaries.phusionpassenger.com/binaries/passenger/by_release/5.0.30/agent-x86_64-linux.tar.gz into /var/railsapps/Mess-Facilities-Portal/vendor/bundle/ruby/2.3.0/gems/passenger-5.0.30/download_cache
+
+current directory: /var/railsapps/Mess-Facilities-Portal/vendor/bundle/ruby/2.3.0/gems/passenger-5.0.30/src/helper-scripts/download_binaries
+make "DESTDIR=" clean
+true
+
+current directory: /var/railsapps/Mess-Facilities-Portal/vendor/bundle/ruby/2.3.0/gems/passenger-5.0.30/src/helper-scripts/download_binaries
+make "DESTDIR="
+true
+
+current directory: /var/railsapps/Mess-Facilities-Portal/vendor/bundle/ruby/2.3.0/gems/passenger-5.0.30/src/helper-scripts/download_binaries
+make "DESTDIR=" install
+true
