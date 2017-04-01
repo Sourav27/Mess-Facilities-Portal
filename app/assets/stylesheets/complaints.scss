@@ -107,3 +107,9 @@ body{
 ::-webkit-scrollbar-thumb:window-inactive {
   background: rgba(149, 165, 166,0.4); 
 }
+.input-sm{
+  font-size: inherit !important;
+}
+.input-daterange{
+  top: 0.8em;
+}

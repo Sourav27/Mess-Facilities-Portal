@@ -120,18 +120,23 @@ class ComplaintsController < ApplicationController
 	end
 
 	def all
-		@month = params[:month]
-		@year = params[:year]
+		#@month = params[:month]
+		#@year = params[:year]
+		@from = params[:from_date]
+		@to = params[:to_date]
 		@admin = session[:admin]
 		# Rails.logger.debug("Month: #{@month}")
 		# Rails.logger.debug("Year: #{@year}")
 		# Rails.logger.debug("Admin: #{session[:admin]}")
-		if params[:month].present?
-			complaints1 = Complaint.where("MONTH(created_at) = ? and YEAR(created_at) = ?", @month,@year).order('created_at desc')
+		#if params[:month].present?
+			#complaints1 = Complaint.where("MONTH(created_at) = ? and YEAR(created_at) = ?", @month,@year).order('created_at desc')
+		if params[:from_date].present?
+			complaints1 = Complaint.where(:created_at => @from.to_date.beginning_of_day..@to.to_date.end_of_day)
 		else
-			@month = Date.today.month
-			@year = Date.today.year
-			complaints1 = Complaint.where("MONTH(created_at) = ? and YEAR(created_at) = ?", Date.today.month,Date.today.year).order('created_at desc')
+			#@month = Date.today.month
+			#@year = Date.today.year
+			#complaints1 = Complaint.where("MONTH(created_at) = ? and YEAR(created_at) = ?", Date.today.month,Date.today.year).order('created_at desc')
+			complaints1 = Complaint.where(:created_at => Time.now.beginning_of_day..Time.now.end_of_day)
 		end	
 		# Rails.logger.debug("complaint: #{complaints1.first.title}")
 		@complaints ||= []
@@ -184,7 +189,7 @@ class ComplaintsController < ApplicationController
 				@ids = @ids.split(",")
 				@ids.each do |value|
 					@tempid = Complaint.find(params[:id]).category_id
-					Rails.logger.debug(value.to_i.inspect)
+					#Rails.logger.debug(value.to_i.inspect)
 				    if value.to_i==@tempid
 				    	return true 
 				    #else

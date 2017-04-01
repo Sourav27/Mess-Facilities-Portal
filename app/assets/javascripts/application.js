@@ -14,13 +14,14 @@
 //= require jquery_ujs
 //= require bootstrap
 //= require cable
+// = require bootstrap-datepicker
 //= require turbolinks
 //= require_tree .
 $(function(){
-	$('#month').change(function(){
+	$('#to_date').change(function(){
 		$('form#date').trigger('submit.rails');
 	});
-	$('#year').change(function(){
+	$('#from_date').change(function(){
 		$('form#date').trigger('submit.rails');
 	});
 });

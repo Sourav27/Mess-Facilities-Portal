@@ -1,5 +1,5 @@
 wb = xlsx_package.workbook
-wb.add_worksheet(name: @month.to_s+"_"+@year.to_s) do |sheet|
+wb.add_worksheet(name: "Mess_Facilities_Complaints") do |sheet|
 	sheet.add_row ["S.No.","Title","Content","Mess/Facility","Category","User","Approached authorities?","Date","Solved?"]
 	@complaints.each_with_index do |c, index|
 	   sheet.add_row [index+1,c.title, c.content, c.category.name, ComplaintCategory.find(c.complaint_category_ids).name, User.find_by(username: c.user_id).username, c.contacted ? "Yes":"No", (c.created_at).strftime("%d-%m-%y"), c.solved ? "Yes":"No"]

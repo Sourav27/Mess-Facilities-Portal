@@ -2,8 +2,11 @@
 	    <ul class="list-inline">
 	    <li><%= form_tag 'complaints_all', id: 'date', method: :get, remote: true do %> 	
 		<% from = Complaint.first.created_at && to = Complaint.last.created_at %>
-		<%= select_month(Date.today,start_month: 1, end_month: 12, :prefix => "month", :discard_type => true) %>
-		<%= select_year(Date.today,:start_year => from.year, :end_year => to.year, :prefix => "year", :discard_type => true) %>
+		<div class="input-daterange input-group" id="datepicker">
+		<%= text_field_tag :from_date, Time.now.strftime("%d/%m/%Y"),class: 'input-sm form-control','data-provide' => 'datepicker','data-date-format'=>'dd/mm/yyyy' %><span class="input-group-addon">to</span>
+		<%= text_field_tag :to_date, Time.now.strftime("%d/%m/%Y"),class: 'input-sm form-control','data-provide'=> 'datepicker' ,'data-date-format'=>'dd/mm/yyyy'%></div>
+		<!--%= select_month(Date.today,start_month: 1, end_month: 12, :prefix => "month", :discard_type => true) %-->
+		<!--%= select_year(Date.today,:start_year => from.year, :end_year => to.year, :prefix => "year", :discard_type => true) %-->
     	    <% end %></li>
 	    <li><%= link_to 'Logout', all_logout_path, class: "btn btn-danger" %></li>
 	    <li><button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal">Change Password</button></li>
