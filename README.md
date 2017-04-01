@@ -1,24 +1,31 @@
-# README
+# Mess and Facilities Portal - IIT Madras
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Description
 
-Things you may want to cover:
+This application is used to register complaints and feedback regarding Mess and Facilities in IIT Madras. Any student facing any issue with their service can contact the authorities directly and receive prompt responses.
 
-* Ruby version
+## System dependencies
 
-* System dependencies
+This application currently works with:
 
-* Configuration
+* Ruby 2.3.x
+* Rails 5.0.x
+* MySQL
 
-* Database creation
+## Installation
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+After cloning this repository, install the gems required for the app.
+```
+cd Mess-Facilities-Portal
+bundle install
+```
+# Database initialization
+Add MySQL credentials to database.yml and then setup the database
+```
+cp config/database.yml.temp config/database.yml
+rails db:setup
+```
+# Deployment
+```
+rails s
+```
