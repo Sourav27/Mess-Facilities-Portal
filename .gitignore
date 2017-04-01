@@ -14,6 +14,7 @@
 #Ignore database settings
 /config/database.yml
 /config/environments/production.rb
+/app/controllers/sessions_controller.rb
 # Ignore all logfiles and tempfiles.
 /log/*
 !/log/.keep
