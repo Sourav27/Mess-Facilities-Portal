@@ -10,5 +10,7 @@ Rails.application.routes.draw do
 
 	get 'resolve' => 'complaints#resolve'
 	post 'all' => 'sessions#all'
+        get 'all_logout' => 'sessions#all_logout'
+	post 'all_change' => 'sessions#all_change'
 	mount ActionCable.server => '/mess-facilities/cable'
 end
